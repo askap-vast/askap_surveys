@@ -20,6 +20,6 @@ EMU_2205-51,22:05:27.272,-51:07:06.39,closepack36,0.9,45.0,943.491,No
 Other surveys:
 * FIRST: coverage maps from http://sundog.stsci.edu/first/catalogs/readme.html#coverage
 * DES: mangle file from http://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/
-* SPT: rough parameters read off plot from http://moriond.in2p3.fr/J16/transparencies/3_tuesday/1_morning/1_bender.pdf
+* SPT: rough parameters read off plot from Story et al. 2013, https://iopscience.iop.org/article/10.1088/0004-637X/779/1/86/pdf
 * VPHAS: http://horus.roe.ac.uk/vsa/coverage-maps.html
 * VVV: http://horus.roe.ac.uk/vsa/coverage-maps.html
