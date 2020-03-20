@@ -22,3 +22,4 @@ Other surveys:
 * DES: mangle file from http://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/
 * SPT: rough parameters read off plot from http://moriond.in2p3.fr/J16/transparencies/3_tuesday/1_morning/1_bender.pdf
 * VPHAS: http://horus.roe.ac.uk/vsa/coverage-maps.html
+* VVV: http://horus.roe.ac.uk/vsa/coverage-maps.html
