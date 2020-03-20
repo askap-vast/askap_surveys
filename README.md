@@ -16,3 +16,7 @@ EMU_2154-55,21:54:00.000,-55:43:29.41,closepack36,0.9,45.0,943.491,No
 EMU_2156-60,21:56:34.285,-60:19:18.17,closepack36,0.9,45.0,943.491,No
 EMU_2205-51,22:05:27.272,-51:07:06.39,closepack36,0.9,45.0,943.491,No
 ```
+
+Other surveys:
+* FIRST: coverage maps from http://sundog.stsci.edu/first/catalogs/readme.html#coverage
+* DES: mangle file from http://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/
