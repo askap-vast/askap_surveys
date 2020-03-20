@@ -1,0 +1,5 @@
+Name,RA,Dec,Footprint,Pitch,Rotation,Frequency,Interleaved
+G23_T0A,22:46:13.600,-32:15:35.27,square_6x6,0.9,-43.29,1290.0,yes
+G23_T0B,22:48:21.955,-32:42:31.25,square_6x6,1.05,-43.58,1004.0,yes
+G15_T0A,14:18:11.978,00:41:57.20,square_6x6,0.9,-45.03,1290.0,yes
+G15_T0B,14:19:59.976,00:14:57.17,square_6x6,0.9,-43.03,1290.0,yes
