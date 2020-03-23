@@ -11,7 +11,8 @@ import argparse
 
 class ASKAP_Survey():
     ASKAP_ROTATION = 45*u.deg  # may not be an appropriate assumption!
-    WIDTH = 4.1*u.deg
+    # full width (diameter)
+    WIDTH = 2*4.1*u.deg
     HEIGHT = WIDTH
 
     def __init__(self, field_list, max_depth=7):
@@ -24,7 +25,7 @@ class ASKAP_Survey():
         self.moc=MOC()
         for _, field in self.fields_df.iterrows():
             center = SkyCoord(ra=field.RA, dec=field.Dec, unit="hourangle,deg")
-            sep = np.hypot(self.WIDTH, self.HEIGHT)
+            sep = np.hypot(self.WIDTH, self.HEIGHT)/2.0
             self.region_list.append(regions.RectangleSkyRegion(center, self.WIDTH, self.HEIGHT, self.ASKAP_ROTATION + (field.Rotation*u.deg)))
             self.vertices = SkyCoord([
                 center.directional_offset_by(self.ASKAP_ROTATION + pa + (field.Rotation*u.deg), sep)
