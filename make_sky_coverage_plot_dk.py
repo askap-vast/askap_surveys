@@ -23,7 +23,9 @@ class FITSMOCSurvey(skymapper.survey.Survey):
 
 
 class ASKAP_Survey_Map():
-    def __init__(self, freq=888, plot_hpx_order = 7, gridsep=30, cmap=matplotlib.pyplot.get_cmap("Dark2")):
+    def __init__(self, freq=888, plot_hpx_order = 7, gridsep=30, cmap=matplotlib.pyplot.get_cmap("Dark2"), projection="Mollweide", **kwargs):
+        if not projection in skymapper.projection_register.keys():
+            raise ArgumentError('Projection %s not valid for skymapper' % projection)
         self.freq=freq
         self.plot_hpx_order=plot_hpx_order
         self.gridsep=gridsep
@@ -45,7 +47,8 @@ class ASKAP_Survey_Map():
         bg_gsm_equatorial = healpy.pixelfunc.get_interp_val(bg_gsm, coords_gal.l.value, coords_gal.b.value, lonlat=True)
         bg_gsm_equatorial_o7 = healpy.ud_grade(bg_gsm_equatorial, 2**self.plot_hpx_order)  # degrade the resolution
 
-        self.projection = skymapper.Mollweide()
+        #self.projection = skymapper.Mollweide(lon_0=RA0)
+        self.projection = getattr(skymapper,projection)(**kwargs)
         self.ax = skymapper.Map(self.projection, interactive=False)
         self.ax.grid(sep=self.gridsep)
         self.nside = 2**self.plot_hpx_order
@@ -86,6 +89,7 @@ class ASKAP_Survey_Map():
     def add_legend(self, handles=None, labels=None, ncolmax=5):
         # get total list of handles and labels
         all_handles=self.plotted_surveys
+        # add in any additional handles and labels if specified
         if handles is not None and len(handles)>0:
             all_handles+=handles
         all_labels=self.labels
@@ -124,7 +128,7 @@ gaskap = FITSMOCSurvey("GASKAP.MOC.fits")
 possum = FITSMOCSurvey("POSSUM.MOC.fits")
 
 
-p=ASKAP_Survey_Map(cmap=sns.color_palette('husl',13))
+p=ASKAP_Survey_Map(cmap=sns.color_palette('husl',13), lon_0=0)
 p.add_survey(first, "FIRST", 0.2)
 p.add_survey(des, "DES", 0.3, edgealpha=0.5)
 p.add_survey(cnss, "CNSS", 0.75)
