@@ -1,6 +1,13 @@
 # askap_surveys
 Basic parameters for ASKAP surveys to aid coordination
 
+Requirements (beyond standard):
+* [skymapper](https://github.com/pmelchior/skymapper)
+* [mocpy](https://cds-astro.github.io/mocpy/)
+* [pymangle](https://github.com/esheldon/pymangle)
+* [pygsm](https://github.com/telegraphic/PyGSM)
+* [healpy](https://healpy.readthedocs.io)
+
 Format for each survey (largely taken from confluence pages like https://confluence.csiro.au/display/askapsst/EMU):
 
 ```
@@ -16,6 +23,13 @@ EMU_2154-55,21:54:00.000,-55:43:29.41,closepack36,0.9,45.0,943.491,No
 EMU_2156-60,21:56:34.285,-60:19:18.17,closepack36,0.9,45.0,943.491,No
 EMU_2205-51,22:05:27.272,-51:07:06.39,closepack36,0.9,45.0,943.491,No
 ```
+
+Each survey (DINGO, EMU, FLASH, GASKAP, POSSUM, VAST, WALLABY) has a `CSV` file as well as a `MOC`.  The latter can be loaded into [aladin](https://aladin.u-strasbg.fr) as well.
+
+Scripts:
+* `askap_field_to_moc.py`: convert a `CSV` file to a `MOC` and a ds9 regions file.  Usage: `python ./askap_field_to_moc.py --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg`.  
+* `make_sky_coverage_plot_dk.py`: take all of the individual surveys and overplot them on the GSM sky image.  Various parameters can be tweaked (number of surveys shown, colors, ...).
+
 
 Other surveys:
 * FIRST: coverage maps from http://sundog.stsci.edu/first/catalogs/readme.html#coverage
