@@ -52,10 +52,11 @@ def main():
     des = skymapper.survey.DES()
 
     map_options={}
-    for i in args.map_options:
-        k,v=i.split('=')
-        map_options[k.strip()]=float(v)
-
+    if args.map_options is not None and len(args.map_options)>0:
+        for i in args.map_options:
+            k,v=i.split('=')
+            map_options[k.strip()]=float(v)
+            
     p = ASKAPSurveyMap(cmap=sns.color_palette("husl", 13),
                        projection=args.projection,
                        **map_options,
