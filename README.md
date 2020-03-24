@@ -38,7 +38,26 @@ The following scripts will be installed into your path:
 askap_field_to_moc --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg
 ```
 
-* `sky_coverage_plot`: take all of the provided surveys and overplot them on the GSM sky image. This script is currently supplied as a working example only. You may write your own plotting script that follows this example (the source is in `askap_surveys/scripts/sky_coverage_plot.py`) and adjust various parameters (number of surveys shown, colors, ...). A CLI interface may be provided for this script in the future.
+* `sky_coverage_plot`: take all of the provided surveys and overplot them on the GSM sky image. This script is currently supplied largely as a working example . You may write your own plotting script that follows this example (the source is in `askap_surveys/scripts/sky_coverage_plot.py`) and adjust various parameters (number of surveys shown, colors, ...). Basic CLI: 
+```
+sky_coverage_plot -h
+usage: sky_coverage_plot [-h] [-o OUT] [--askaponly]
+                         [-p {Albers,LambertConformal,Equidistant,Hammer,Mollweide,EckertIV,WagnerI,WagnerIV,WagnerVII,McBrydeThomasFPQ,HyperElliptical,Tobler,EqualEarth}]
+                         [-m [MAP_OPTIONS [MAP_OPTIONS ...]]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUT, --out OUT     Output name for plot (default: test.pdf)
+  --askaponly           Only include the ASKAP surveys (default: False)
+  -p {Albers,LambertConformal,Equidistant,Hammer,Mollweide,EckertIV,WagnerI,WagnerIV,WagnerVII,McBrydeThomasFPQ,HyperElliptical,Tobler,EqualEarth}, --projection {Albers,LambertConformal,Equidistant,Hammer,Mollweide,EckertIV,WagnerI,WagnerIV,WagnerVII,McBrydeThomasFPQ,HyperElliptical,Tobler,EqualEarth}
+                        Projection type (default: Mollweide)
+  -m [MAP_OPTIONS [MAP_OPTIONS ...]], --map_options [MAP_OPTIONS [MAP_OPTIONS ...]]
+                        Additional map projection arguments as key=value pairs
+                        (e.g., 'lon_0=180', ...). See https://github.com/pmelc
+                        hior/skymapper/blob/master/skymapper/projection.py
+                        (default: None)
+```
+Users can change the output filename (and type), whether only ASKAP surveys are plotted (default = ASKAP + others), the map projection (default = Mollweide), and certain map projection parameters.
 
 ## Included surveys
 
