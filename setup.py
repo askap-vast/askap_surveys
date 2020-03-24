@@ -8,7 +8,13 @@ setup(
     author_email="kaplan@uwm.edu",
     url="",
     packages=find_packages(),
-    scripts=["scripts/askap_field_to_moc.py", "scripts/sky_coverage_plot.py"],
-    python_requires='>=3.7',
+    # scripts=["scripts/askap_field_to_moc.py", "scripts/sky_coverage_plot.py"],
+    entry_points={
+        "console_scripts": [
+            "sky_coverage_plot=askap_surveys.scripts.sky_coverage_plot:main",
+            "askap_field_to_moc=askap_surveys.scripts.askap_field_to_moc:main",
+        ],
+    },
+    python_requires=">=3.7",
     include_package_data=True,
 )
