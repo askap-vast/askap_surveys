@@ -1,27 +1,16 @@
 -i https://pypi.org/simple
 -e git+https://github.com/marxide/skymapper.git#egg=skymapper
 -e git+https://github.com/telegraphic/PyGSM.git#egg=pygsm
-astropy-healpix==0.5
-astropy==4.0
-cdshealpix==0.5.1
-cycler==0.10.0
-decorator==4.4.2
-ephem==3.7.7.0
-h5py==2.10.0
-healpy==1.13.0
-kiwisolver==1.1.0
-lark-parser==0.8.2
-matplotlib==3.2.1
-mocpy==0.8.2
-networkx==2.3
-numpy==1.18.2
-pandas==1.0.3
-pyephem==3.7.7.0
-pymangle==0.9.1
-pyparsing==2.4.6
-python-dateutil==2.8.1
-pytz==2019.3
-regions==0.4
-scipy==1.4.1
-seaborn==0.10.0
-six==1.14.0
+networkx < 2.4
+mocpy
+pymangle
+healpy
+seaborn
+pandas
+numpy
+astropy
+regions
+matplotlib
+h5py
+scipy
+astropy-healpix 
