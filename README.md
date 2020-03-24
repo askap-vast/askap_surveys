@@ -24,7 +24,7 @@ EMU_2156-60, 21:56:34.285, -60:19:18.17, closepack36, 0.9, 45.0, 943.491, No
 EMU_2205-51, 22:05:27.272, -51:07:06.39, closepack36, 0.9, 45.0, 943.491, No
 ```
 
-Each survey (DINGO, EMU, FLASH, GASKAP, POSSUM, VAST, WALLABY) has a `CSV` file as well as a `MOC`.  The latter can be loaded into [aladin](https://aladin.u-strasbg.fr) as well.
+Each survey ([DINGO](https://confluence.csiro.au/display/askapsst/DINGO), [EMU](https://confluence.csiro.au/display/askapsst/EMU), [FLASH](https://confluence.csiro.au/display/askapsst/FLASH), [GASKAP](https://confluence.csiro.au/display/askapsst/GASKAP), [POSSUM](https://confluence.csiro.au/display/askapsst/POSSUM), [VAST](https://confluence.csiro.au/display/askapsst/VAST), [WALLABY](https://confluence.csiro.au/display/askapsst/WALLABY)) has a `CSV` file as well as a `MOC`.  The latter can be loaded into [aladin](https://aladin.u-strasbg.fr) as well.
 
 Scripts:
 * `askap_field_to_moc.py`: convert a `CSV` file to a `MOC` and a ds9 regions file.  Usage: `python ./askap_field_to_moc.py --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg`.  **NOTE** this is preliminary and doesn't correctly use frequency/footprint/pitch information.
