@@ -2,6 +2,10 @@
 
 Basic parameters for ASKAP surveys to aid coordination.
 
+![Examples](examples/default.png)
+See [Examples](examples/EXAMPLES.md) for further examples
+
+
 ## Requirements (beyond standard)
 
 * [skymapper](https://github.com/pmelchior/skymapper)
@@ -9,6 +13,8 @@ Basic parameters for ASKAP surveys to aid coordination.
 * [pymangle](https://github.com/esheldon/pymangle)
 * [pygsm](https://github.com/telegraphic/PyGSM)
 * [healpy](https://healpy.readthedocs.io)
+
+## Survey information sources:
 
 Format for each ASKAP survey tile description (largely taken from confluence pages like <https://confluence.csiro.au/display/askapsst/EMU>):
 
