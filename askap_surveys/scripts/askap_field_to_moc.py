@@ -1,13 +1,20 @@
+#!/usr/bin/env python
 import argparse
+from pathlib import Path
 from askap_surveys.askap import ASKAPSurvey
 
 
 def main():
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        description=(
+            "Create a FITS MOC and a DS9 region file from an ASKAP survey tile "
+            "description CSV. See tile data CSV files provided with the `askap_surveys` "
+            "package for examples."
+        ),
     )
     parser.add_argument(
-        "--fields", type=str, help="CSV file with list of fields",
+        "fields", type=Path, help="CSV file with list of fields",
     )
     parser.add_argument(
         "--moc", type=str, help="Name for output MOC file", default=None

@@ -1,8 +1,8 @@
 # askap_surveys
 
-Basic parameters for ASKAP surveys to aid coordination
+Basic parameters for ASKAP surveys to aid coordination.
 
-Requirements (beyond standard):
+## Requirements (beyond standard)
 
 * [skymapper](https://github.com/pmelchior/skymapper)
 * [mocpy](https://cds-astro.github.io/mocpy/)
@@ -10,7 +10,7 @@ Requirements (beyond standard):
 * [pygsm](https://github.com/telegraphic/PyGSM)
 * [healpy](https://healpy.readthedocs.io)
 
-Format for each survey (largely taken from confluence pages like <https://confluence.csiro.au/display/askapsst/EMU>):
+Format for each ASKAP survey tile description (largely taken from confluence pages like <https://confluence.csiro.au/display/askapsst/EMU>):
 
 ```
 Name,RA,Dec,Footprint,Pitch,Rotation,Frequency,Interleaved
@@ -28,12 +28,31 @@ EMU_2205-51, 22:05:27.272, -51:07:06.39, closepack36, 0.9, 45.0, 943.491, No
 
 Each survey (DINGO, EMU, FLASH, GASKAP, POSSUM, VAST, WALLABY) has a `CSV` file as well as a `MOC`.  The latter can be loaded into [aladin](https://aladin.u-strasbg.fr) as well.
 
-Scripts:
+## Scripts
 
-* `askap_field_to_moc.py`: convert a `CSV` file to a `MOC` and a ds9 regions file.  Usage: `python ./askap_field_to_moc.py --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg`.  **NOTE** this is preliminary and doesn't correctly use frequency/footprint/pitch information.
-* `sky_coverage_plot.py`: take all of the individual surveys and overplot them on the GSM sky image.  Various parameters can be tweaked (number of surveys shown, colors, ...).
+The following scripts will be installed into your path:
 
-Other surveys:
+* `askap_field_to_moc`: convert an ASKAP survey `CSV` file to a `MOC` and a ds9 regions file. **NOTE:** this is preliminary and doesn't correctly use frequency/footprint/pitch information. Usage:
+
+```
+askap_field_to_moc --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg
+```
+
+* `sky_coverage_plot`: take all of the provided surveys and overplot them on the GSM sky image. This script is currently supplied as a working example only. You may write your own plotting script that follows this example (the source is in `askap_surveys/scripts/sky_coverage_plot.py`) and adjust various parameters (number of surveys shown, colors, ...). A CLI interface may be provided for this script in the future.
+
+## Included surveys
+
+### ASKAP pilot surveys
+
+* DINGO
+* EMU
+* FLASH
+* GASKAP
+* POSSUM
+* VAST
+* WALLABY
+
+### Other
 
 * FIRST: coverage maps from <http://sundog.stsci.edu/first/catalogs/readme.html#coverage>
 * DES: mangle file from <http://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/>

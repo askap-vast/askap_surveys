@@ -34,6 +34,7 @@ class ASKAPSurveyMap:
             raise ValueError(f"Projection {projection} not valid for skymapper")
         self.freq = freq
         self.plot_hpx_order = plot_hpx_order
+        self.nside = 2 ** self.plot_hpx_order
         self.gridsep = gridsep
         if isinstance(cmap, matplotlib.colors.ListedColormap):
             self.cmap = cmap.colors
@@ -41,9 +42,9 @@ class ASKAPSurveyMap:
             self.cmap = cmap
 
         # make the background map
-        nside = 512  # pygsm outputs nside=512
-        npix = healpy.nside2npix(nside)
-        ra, dec = healpy.pix2ang(nside, np.arange(npix), lonlat=True)
+        gsm_nside = 512  # pygsm outputs nside=512
+        npix = healpy.nside2npix(gsm_nside)
+        ra, dec = healpy.pix2ang(gsm_nside, np.arange(npix), lonlat=True)
         coords = SkyCoord(ra, dec, unit="deg")
         gsm = pygsm.GlobalSkyModel()
 
@@ -54,14 +55,13 @@ class ASKAPSurveyMap:
             bg_gsm, coords_gal.l.value, coords_gal.b.value, lonlat=True
         )
         bg_gsm_equatorial_o7 = healpy.ud_grade(
-            bg_gsm_equatorial, 2 ** self.plot_hpx_order
+            bg_gsm_equatorial, self.nside
         )  # degrade the resolution
 
         # self.projection = skymapper.Mollweide(lon_0=RA0)
         self.projection = getattr(skymapper, projection)(**kwargs)
         self.ax = skymapper.Map(self.projection, interactive=False)
         self.ax.grid(sep=self.gridsep)
-        self.nside = 2 ** self.plot_hpx_order
         self.color_cycle = cycler(facecolors=self.cmap)
         self.color_cycle_it = iter(self.color_cycle)
 
