@@ -42,6 +42,22 @@ askap_field_to_moc --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg
 
 ## Included surveys
 
+MOC FITS files are provided for the following surveys. To access them for your own needs, simply import this package and access the MOC register which maps the survey names to the path to the MOC file. For example, to access the VAST MOC:
+
+```python
+import askap_surveys
+vast_moc_path = askap_surveys.moc_register["VAST"]
+```
+
+To see a list of registered MOC files, inspect the contents of `askap_surveys.moc_register` dict, e.g.
+
+```python
+import askap_surveys
+print(askap_surveys.moc_register.keys())
+```
+
+The provided MOCs are also listed below.
+
 ### ASKAP pilot surveys
 
 * DINGO
@@ -57,5 +73,5 @@ askap_field_to_moc --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg
 * FIRST: coverage maps from <http://sundog.stsci.edu/first/catalogs/readme.html#coverage>
 * DES: mangle file from <http://www.mpe.mpg.de/~tdwelly/erosita/multiwavelength_coverage/>
 * SPT: rough parameters read off plot from Story et al. 2013, <https://iopscience.iop.org/article/10.1088/0004-637X/779/1/86/pdf>
-* VPHAS: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
-* VVV: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
+* VPHAS-DR3: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
+* VVV-DR5: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
