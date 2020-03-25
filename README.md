@@ -8,11 +8,21 @@ See [Examples](examples/EXAMPLES.md) for further examples
 
 ## Requirements (beyond standard)
 
-* [skymapper](https://github.com/pmelchior/skymapper)
+* [skymapper](https://github.com/marxide/skymapper) - this is a fork of the [original](https://github.com/pmelchior/skymapper) that includes speedups
 * [mocpy](https://cds-astro.github.io/mocpy/)
 * [pymangle](https://github.com/esheldon/pymangle)
 * [pygsm](https://github.com/telegraphic/PyGSM)
 * [healpy](https://healpy.readthedocs.io)
+
+These are included in [`requirements.txt`](requirements.txt)
+
+## Installation
+
+Clone and then:
+
+`pip install -r requirements.txt`
+
+`pip install .`
 
 ## Survey information sources:
 
