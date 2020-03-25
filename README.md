@@ -18,7 +18,9 @@ These are included in [`requirements.txt`](requirements.txt)
 
 ## Installation
 
-Clone and then:
+We strongly recommend using a virtual environment, e.g. conda. This package depends on `healpy` which requires the HEALPix C++ libraries. `pip` will try to compile these for your machine, but there are reports of this failing for many users. It is safer to use the binary installations from conda-forge.
+
+Within a conda environment, clone this repository, install the requirements, then install this package:
 
 `pip install -r requirements.txt`
 
