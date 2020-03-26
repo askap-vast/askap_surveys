@@ -1,5 +1,5 @@
 -i https://pypi.org/simple
--e git+https://github.com/marxide/skymapper.git#egg=skymapper
+skymapper
 -e git+https://github.com/telegraphic/PyGSM.git#egg=pygsm
 networkx < 2.4
 mocpy
