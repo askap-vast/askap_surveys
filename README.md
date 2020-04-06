@@ -96,6 +96,20 @@ print(askap_surveys.moc_register.keys())
 
 The provided MOCs are also listed below.
 
+### Querying coverage:
+```python
+import askap_surveys
+import MOC
+from astropy.coordinates import SkyCoord
+
+# source to query for
+p=SkyCoord('04:27:49.2','-67:04:34',unit=('hour','deg')) 
+for survey in askap_surveys.moc_register.keys():
+    moc=MOC.from_fits(askap_surveys.moc_register[survey])
+    print(survey,moc.contains(p.ra,p.dec))
+```
+
+
 ### ASKAP pilot surveys
 
 * DINGO
