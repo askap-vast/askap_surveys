@@ -52,7 +52,7 @@ The following scripts will be installed into your path:
 * `askap_field_to_moc`: convert an ASKAP survey `CSV` file to a `MOC` and a ds9 regions file. **NOTE:** this is preliminary and doesn't correctly use frequency/footprint/pitch information. Usage:
 
 ```sh
-askap_field_to_moc --fields=VAST.csv --moc=VAST.MOC.fits --reg=VAST.reg
+askap_field_to_moc --moc=VAST.MOC.fits --reg=VAST.reg VAST.csv
 ```
 
 * `sky_coverage_plot`: take all of the provided surveys and overplot them on the GSM sky image. This script is currently supplied largely as a working example . You may write your own plotting script that follows this example (the source is in `askap_surveys/scripts/sky_coverage_plot.py`) and adjust various parameters (number of surveys shown, colors, ...). Basic CLI:
