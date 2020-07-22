@@ -5,6 +5,10 @@ Basic parameters for ASKAP surveys to aid coordination.
 ![Examples](examples/default.png)
 See [Examples](examples/EXAMPLES.md) for further examples
 
+## Citation
+
+Free to use/modify.  If you wish to use, please credit `David Kaplan and Andrew O'Brien (UW-Milwaukee)`
+
 ## Requirements (beyond standard)
 
 * [skymapper](https://github.com/pmelchior/skymapper)
