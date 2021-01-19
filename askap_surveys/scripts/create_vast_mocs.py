@@ -18,7 +18,7 @@ from typing import List
 import warnings
 
 from astropy.io import fits
-from astropy.wcs import WCS
+from astropy.wcs import WCS, FITSFixedWarning
 import mocpy
 import multiprocessing_logging
 
@@ -51,21 +51,22 @@ def get_moc_output_dir(image_path: Path) -> Path:
 def make_moc(image: Path):
     logger.debug("Opening %s", image)
     with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
+        warnings.simplefilter("ignore", FITSFixedWarning)
         hdul = fits.open(image)
-    hdu = hdul[0]
-    # mocpy doesn't like singleton axes, remove them
-    hdu_squeezed = fits.hdu.image.ImageHDU(
-        data=hdu.data.squeeze(),
-        header=WCS(hdu.header).celestial.to_header(),
-    )
-    logger.info("Creating MOC for %s", image)
-    moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=args.max_norder)
-    output_dir = get_moc_output_dir(image)
-    output_dir.mkdir(mode=0o770, exist_ok=True)
-    output_path = output_dir / image.with_suffix(".moc.fits").name
-    moc.write(output_path)
-    logger.info("Wrote MOC to %s", output_path)
+        hdu = hdul[0]
+        # mocpy doesn't like singleton axes, remove them
+        hdu_squeezed = fits.hdu.image.ImageHDU(
+            data=hdu.data.squeeze(),
+            header=WCS(hdu.header).celestial.to_header(),
+        )
+        logger.info("Creating MOC for %s", image)
+        moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=args.max_norder)
+        output_dir = get_moc_output_dir(image)
+        output_dir.mkdir(mode=0o770, exist_ok=True)
+        output_path = output_dir / image.with_suffix(".moc.fits").name
+        moc.write(output_path)
+        logger.info("Wrote MOC to %s", output_path)
+        hdul.close()
 
 
 if __name__ == "__main__":
