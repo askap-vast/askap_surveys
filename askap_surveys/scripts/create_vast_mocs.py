@@ -1,12 +1,11 @@
 """Traverse the VAST data release directory structure and make a MOC of each image.
+Warning: the method mocpy uses to create a MOC from a FITS image is to calculate the
+world coordinate for every non-NaN/non-blank pixel which can take a few minutes per
+image and also consumes considerable memory.
+
 Usage:
     create_vast_mocs.py [--options] /path/to/VAST
-
-Options:
-    --tiles - process the TILE images
-    --combined - process the COMBINED images
-    --stokes={IQUV} - process the given Stokes parameter(s). Default: I
-
+Run with --help for more information.
 """
 
 import argparse
@@ -49,7 +48,7 @@ def get_moc_output_dir(image_path: Path) -> Path:
     return image_path.parent.parent / output_dir_name
 
 
-def make_moc(image: Path, overwrite=False):
+def make_moc(image: Path, max_norder: int = 16, overwrite: bool = False):
     output_dir = get_moc_output_dir(image)
     output_dir.mkdir(mode=0o770, exist_ok=True)
     output_path = output_dir / image.with_suffix(".moc.fits").name
@@ -65,7 +64,7 @@ def make_moc(image: Path, overwrite=False):
                 header=WCS(hdu.header).celestial.to_header(),
             )
             logger.info("Creating MOC for %s", image)
-            moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=args.max_norder)
+            moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=max_norder)
             moc.write(output_path, overwrite=overwrite)
             logger.info("Wrote MOC to %s", output_path)
             hdul.close()
@@ -73,7 +72,7 @@ def make_moc(image: Path, overwrite=False):
         logger.info("Skipping %s", image)
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
@@ -108,14 +107,16 @@ if __name__ == "__main__":
         help="Number of multiprocessing workers to spawn.",
     )
     parser.add_argument(
-        "--dryrun",
+        "--dry-run",
         action="store_true",
         help=(
             "Don't create MOCs, only collect images and report the number that would be "
             "processed."
         ),
     )
-    parser.add_argument("--overwrite", action="store_true", help="Overwrite existing MOCs.")
+    parser.add_argument(
+        "--overwrite", action="store_true", help="Overwrite existing MOCs."
+    )
 
     args = parser.parse_args()
 
@@ -140,10 +141,17 @@ if __name__ == "__main__":
                 ),
             )
     logger.info("Finished building input image list.")
-    if args.dryrun:
+    if args.dry_run:
         logger.info("Would create %d MOCs.", len(list(images)))
     else:
         logger.debug("Creating multiprocessing pool with %d workers.", args.nworkers)
         pool = multiprocessing.Pool(processes=args.nworkers)
-        pool.map(partial(make_moc, overwrite=args.overwrite), images)
+        pool.map(
+            partial(make_moc, max_norder=args.max_norder, overwrite=args.overwrite),
+            images,
+        )
         pool.close()
+
+
+if __name__ == "__main__":
+    main()

@@ -1,9 +1,8 @@
 -i https://pypi.org/simple
 skymapper
--e git+https://github.com/telegraphic/PyGSM.git#egg=pygsm
+git+https://github.com/telegraphic/PyGSM.git#egg=pygsm
 networkx < 2.4
 mocpy
-pymangle
 healpy
 seaborn
 pandas
@@ -14,3 +13,5 @@ matplotlib
 h5py
 scipy
 astropy-healpix 
+pymangle
+multiprocessing_logging
