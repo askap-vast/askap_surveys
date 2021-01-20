@@ -10,6 +10,7 @@ Options:
 """
 
 import argparse
+from functools import partial
 from itertools import chain
 import logging
 import multiprocessing
@@ -48,25 +49,28 @@ def get_moc_output_dir(image_path: Path) -> Path:
     return image_path.parent.parent / output_dir_name
 
 
-def make_moc(image: Path):
-    logger.debug("Opening %s", image)
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore", FITSFixedWarning)
-        hdul = fits.open(image)
-        hdu = hdul[0]
-        # mocpy doesn't like singleton axes, remove them
-        hdu_squeezed = fits.hdu.image.ImageHDU(
-            data=hdu.data.squeeze(),
-            header=WCS(hdu.header).celestial.to_header(),
-        )
-        logger.info("Creating MOC for %s", image)
-        moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=args.max_norder)
-        output_dir = get_moc_output_dir(image)
-        output_dir.mkdir(mode=0o770, exist_ok=True)
-        output_path = output_dir / image.with_suffix(".moc.fits").name
-        moc.write(output_path)
-        logger.info("Wrote MOC to %s", output_path)
-        hdul.close()
+def make_moc(image: Path, overwrite=False):
+    output_dir = get_moc_output_dir(image)
+    output_dir.mkdir(mode=0o770, exist_ok=True)
+    output_path = output_dir / image.with_suffix(".moc.fits").name
+    if (output_path.exists() and overwrite) or not output_path.exists():
+        logger.debug("Opening %s", image)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", FITSFixedWarning)
+            hdul = fits.open(image)
+            hdu = hdul[0]
+            # mocpy doesn't like singleton axes, remove them
+            hdu_squeezed = fits.hdu.image.ImageHDU(
+                data=hdu.data.squeeze(),
+                header=WCS(hdu.header).celestial.to_header(),
+            )
+            logger.info("Creating MOC for %s", image)
+            moc = mocpy.MOC.from_fits_image(hdu_squeezed, max_norder=args.max_norder)
+            moc.write(output_path, overwrite=overwrite)
+            logger.info("Wrote MOC to %s", output_path)
+            hdul.close()
+    else:
+        logger.info("Skipping %s", image)
 
 
 if __name__ == "__main__":
@@ -111,6 +115,7 @@ if __name__ == "__main__":
             "processed."
         ),
     )
+    parser.add_argument("--overwrite", action="store_true", help="Overwrite existing MOCs.")
 
     args = parser.parse_args()
 
@@ -140,5 +145,5 @@ if __name__ == "__main__":
     else:
         logger.debug("Creating multiprocessing pool with %d workers.", args.nworkers)
         pool = multiprocessing.Pool(processes=args.nworkers)
-        pool.map(make_moc, images)
+        pool.map(partial(make_moc, overwrite=args.overwrite), images)
         pool.close()
