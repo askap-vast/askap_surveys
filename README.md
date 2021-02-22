@@ -105,7 +105,7 @@ The provided MOCs are also listed below.
 ### Querying coverage:
 ```python
 import askap_surveys
-import MOC
+from mocpy import MOC
 from astropy.coordinates import SkyCoord
 
 # source to query for
