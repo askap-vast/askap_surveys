@@ -141,3 +141,4 @@ for survey in askap_surveys.moc_register.keys():
 * SPT: rough parameters read off plot from Story et al. 2013, <https://iopscience.iop.org/article/10.1088/0004-637X/779/1/86/pdf>
 * VPHAS-DR3: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
 * VVV-DR5: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
+* DECaPS DR2: <https://faun.rc.fas.harvard.edu/saydjari/DECaPS2/dat/cov/> downsampled by a factor of 32
