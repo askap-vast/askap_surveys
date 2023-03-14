@@ -142,3 +142,4 @@ for survey in askap_surveys.moc_register.keys():
 * VPHAS-DR3: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
 * VVV-DR5: <http://horus.roe.ac.uk/vsa/coverage-maps.html>
 * DECaPS DR2: <https://faun.rc.fas.harvard.edu/saydjari/DECaPS2/dat/cov/> downsampled by a factor of 32
+* LoTSS DR2: <https://lofar-surveys.org/dr2_release.html>
