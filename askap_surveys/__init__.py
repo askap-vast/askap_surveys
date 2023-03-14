@@ -21,9 +21,10 @@ def _register_moc(moc_path: Path, name: Optional[str] = None):
 
 
 def _register_package_mocs():
-    """Register MOC files provided with the package.
-    """
-    with importlib.resources.path("askap_surveys.data", "moc") as moc_path:
+    """Register MOC files provided with the package."""
+    with importlib.resources.as_file(
+        importlib.resources.files("askap_surveys.data.moc")
+    ) as moc_path:
         for moc_file in moc_path.glob("*.fits"):
             _register_moc(moc_file)
 
