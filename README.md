@@ -133,6 +133,7 @@ for survey in askap_surveys.moc_register.keys():
   * `VAST_galactic`
   * `VAST_highdec`
   * `VAST_equatorial`
+* EMU/POSSUM
 
 ### Other
 
